@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Comment Alerts for Jira</title>
+<meta name="description" content="Privacy policy for Comment Alerts for Jira: what the app reads, what it stores, and the single external service it contacts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <p class="kicker">Legal</p>
+  <h1>Privacy Policy</h1>
+  <p class="tagline">Comment Alerts for Jira. Last updated 31 August 2026.</p>
+  <nav class="site">
+    <a href="index.html">Documentation</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<p>Comment Alerts for Jira (&ldquo;the app&rdquo;) is published by <span class="fill">LEGAL ENTITY</span>. This policy describes what the app reads, what it stores, and what leaves Atlassian.</p>
+
+<h2>What the app processes</h2>
+<p>When someone comments on a Jira issue, the app receives the issue and comment from the event Atlassian sends it. It then looks up the display names and email addresses of that issue&rsquo;s assignee and reporter, so it has somewhere to send the notification.</p>
+<p>It does not search, browse or index your issues, and it does not enumerate your user directory. It reads only the two people already associated with the issue that was commented on.</p>
+
+<h2>What it stores, and where</h2>
+<p>Everything the app stores lives in Forge storage, which is hosted by Atlassian. Specifically:</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Stored</th><th>Detail</th></tr></thead>
+  <tbody>
+    <tr><td>Settings</td><td>Your From address and whether sending is enabled</td></tr>
+    <tr><td>Template</td><td>The subject and HTML body an administrator wrote</td></tr>
+    <tr><td>Delivery log</td><td>The last 25 attempts: time, issue key, status, recipients, subject, duration, and any error</td></tr>
+    <tr><td>Provider API key</td><td>Encrypted at rest. Never displayed again after saving &mdash; the page can only tell whether a key exists</td></tr>
+  </tbody>
+</table>
+</div>
+<p><span class="fill">LEGAL ENTITY</span> operates no servers and stores nothing on its own infrastructure, because it has none. There is no vendor-side database, queue or log holding your data.</p>
+
+<h2>What leaves Atlassian</h2>
+<p>One thing: the email itself. The app makes an HTTPS request to <code>api.resend.com</code> carrying the recipient addresses, your From address, and the rendered subject and body. The body contains whatever your template references &mdash; by default the issue key, summary, status, project, assignee and reporter names, a link to the issue, and the comment text.</p>
+<p>That request is made with <strong>your</strong> Resend API key, through <strong>your</strong> Resend account, under a sending domain you verified. We receive no copy of any message and have no access to that account.</p>
+<p>The app contacts no other external service. It collects no analytics and sends no telemetry or error reports.</p>
+
+<h2>Logging</h2>
+<p>Application logs record deliveries as counts, never as addresses &mdash; a delivery appears as <code>SENT ENG-412 to 1 recipient in 153ms</code>. Error messages returned by the email provider are stripped of your API key before they are stored or displayed.</p>
+
+<h2>Who can see your data</h2>
+<p>The settings page, the message template and the delivery log are restricted to Jira administrators. The restriction is enforced on every request to the app, not only in the interface, so it cannot be bypassed by calling the app directly.</p>
+
+<h2>Retention and deletion</h2>
+<p>The delivery log holds 25 entries and discards older ones as new attempts arrive. Uninstalling the app removes its stored data, including the encrypted API key. To request deletion sooner, contact us at the address below.</p>
+
+<h2>Sub-processors</h2>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Party</th><th>Role</th></tr></thead>
+  <tbody>
+    <tr><td>Atlassian</td><td>Hosts the app and all of its stored data</td></tr>
+    <tr><td>Resend</td><td>Delivers your email, under your own account and your own agreement with them</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Data residency</h2>
+<p>Data residency is not supported in this version of the app.</p>
+
+<h2 id="contact">Contact</h2>
+<p>Questions about this policy, or requests relating to personal data, go to <span class="fill">SUPPORT EMAIL</span>.</p>
+
+<footer class="site">
+  Comment Alerts for Jira &middot; published by <span class="fill">LEGAL ENTITY</span><br>
+  <a href="index.html">Documentation</a> &middot; last updated 31 August 2026
+</footer>
+
+</div>
+</body>
+</html>

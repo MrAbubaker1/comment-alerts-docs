@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comment Alerts for Jira — Setup guide</title>
+<meta name="description" content="Setup and documentation for Comment Alerts for Jira: email the assignee and reporter when someone comments on an issue.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <p class="kicker">Documentation</p>
+  <h1>Comment Alerts for Jira</h1>
+  <p class="tagline">Email the assignee and reporter the moment someone comments on an issue.</p>
+  <nav class="site">
+    <a href="#setup">Setup</a>
+    <a href="#template">Template</a>
+    <a href="#troubleshooting">Troubleshooting</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+</header>
+
+<h2>What it does</h2>
+<p>When someone comments on a Jira issue, Comment Alerts emails that issue&rsquo;s assignee and reporter. The message goes out through your own email account, using wording you control, and every attempt is recorded so an administrator can see exactly what was sent.</p>
+
+<h3>What this version does not do</h3>
+<p>It ships with a single rule: <strong>new comment &rarr; assignee and reporter &rarr; every project</strong>. There are no per-project rules, no other trigger events, and no recipient picker yet. If one of those is what you need, get in touch &mdash; what people ask for is what decides the next release.</p>
+
+<h2 id="setup">Setting it up</h2>
+<p>You need a Resend account. The free tier is enough to evaluate the app. Step 2 is the one that catches people out, so do not skip it.</p>
+
+<ol class="steps">
+  <li><span><strong>Create a Resend account</strong><p>Sign up at <a href="https://resend.com">resend.com</a>.</p></span></li>
+  <li><span><strong>Verify your sending domain</strong><p>In Resend, open <em>Domains</em>, add the domain you want mail to come from, and add the DNS records it shows you. Wait until it reads as verified before continuing.</p></span></li>
+  <li><span><strong>Create an API key</strong><p>Resend &rarr; <em>API Keys</em> &rarr; <em>Create</em>. Copy it now &mdash; Resend will not show it to you again.</p></span></li>
+  <li><span><strong>Open the app in Jira</strong><p>Settings &rarr; Apps &rarr; <em>Email notifications</em>. You need to be a Jira administrator.</p></span></li>
+  <li><span><strong>Enter your From address and key</strong><p>Use an address on the domain you verified, such as <code>jira@yourcompany.com</code>. Paste the API key and choose <em>Save settings</em>. The key is encrypted and is never displayed again.</p></span></li>
+  <li><span><strong>Send yourself a test</strong><p>Enter your own address under <em>Send a test</em>. If it arrives, you are finished. The next comment on any issue will notify its assignee and reporter.</p></span></li>
+</ol>
+
+<div class="warn">
+  <h3>Do not skip the domain step</h3>
+  <p>Resend gives new accounts a shared sender on <code>resend.dev</code>. It <strong>only</strong> delivers to the address that owns the Resend account. Mail to anyone else is accepted and then silently discarded &mdash; the app reports success, the delivery log says <em>sent</em>, and nothing arrives.</p>
+  <p>The app warns you when it sees a <code>resend.dev</code> From address. Verify your own domain and the warning clears.</p>
+</div>
+
+<h2 id="template">Writing the message</h2>
+<p>The subject and body are yours to write. Wrap a placeholder in double braces to insert its value with HTML escaped, or triple braces to insert it raw &mdash; use triple braces for <code>comment.body</code> so the commenter&rsquo;s formatting survives.</p>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Placeholder</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td><code>issue.key</code></td><td>The issue key, such as ENG-412</td></tr>
+    <tr><td><code>issue.summary</code></td><td>The issue title</td></tr>
+    <tr><td><code>issue.description</code></td><td>The issue description</td></tr>
+    <tr><td><code>issue.status</code></td><td>Status name, such as In Progress</td></tr>
+    <tr><td><code>issue.priority</code></td><td>Priority name</td></tr>
+    <tr><td><code>issue.project</code></td><td>Project name</td></tr>
+    <tr><td><code>issue.assignee</code></td><td>Assignee display name, or Unassigned</td></tr>
+    <tr><td><code>issue.reporter</code></td><td>Reporter display name</td></tr>
+    <tr><td><code>issue.url</code></td><td>A link straight to the issue</td></tr>
+    <tr><td><code>comment.body</code></td><td>The comment, as HTML. Use triple braces.</td></tr>
+    <tr><td><code>comment.author</code></td><td>Who wrote the comment</td></tr>
+    <tr><td><code>actor.name</code></td><td>Who triggered the event</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Use <em>Preview</em> to render your template against a sample issue before anyone receives it. A placeholder with no value renders as nothing and is listed under the preview, so a typo shows up rather than going out silently.</p>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<h3>The test said &ldquo;sent&rdquo; but nothing arrived</h3>
+<p>Almost always the sending domain. If your From address ends in <code>resend.dev</code>, only the address that owns the Resend account can receive anything. Verify your own domain and use an address on it.</p>
+
+<h3>Comments are not producing any email</h3>
+<p>Open Settings &rarr; Apps &rarr; Email notifications and check <em>Recent sends</em>. A row reading <em>skipped &mdash; no resolvable recipients</em> means neither the assignee nor the reporter has an email address the app can read. An issue with no assignee and no reporter produces nothing.</p>
+
+<h3>I cannot find the settings page</h3>
+<p>It is administrator-only, and it lives in Jira admin settings rather than the main Apps menu: the gear icon &rarr; <em>Apps</em> &rarr; <em>Email notifications</em>.</p>
+
+<h3>Something else</h3>
+<p>Email <span class="fill">SUPPORT EMAIL</span> with the issue key and the time, and we will look at the delivery log.</p>
+
+<footer class="site">
+  Comment Alerts for Jira &middot; published by <span class="fill">LEGAL ENTITY</span><br>
+  <a href="privacy.html">Privacy policy</a> &middot; support: <span class="fill">SUPPORT EMAIL</span>
+</footer>
+
+</div>
+</body>
+</html>
