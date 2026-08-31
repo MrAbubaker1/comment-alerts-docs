@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Comment Alerts for Jira">
+  <title>Comment Alerts for Jira</title>
+
+  <!-- Tile -->
+  <rect width="512" height="512" rx="112" fill="#2F4B8F"/>
+
+  <!-- Speech bubble: the comment -->
+  <g fill="#FFFFFF">
+    <rect x="86" y="162" width="268" height="178" rx="40"/>
+    <polygon points="152,332 152,408 220,332"/>
+  </g>
+
+  <!-- Two lines of comment text -->
+  <g fill="#2F4B8F">
+    <rect x="126" y="216" width="188" height="22" rx="11"/>
+    <rect x="126" y="262" width="132" height="22" rx="11"/>
+  </g>
+
+  <!-- Alert badge, sitting on the bubble corner with a knockout ring -->
+  <circle cx="362" cy="168" r="52" fill="#D99B3E" stroke="#2F4B8F" stroke-width="24"/>
+</svg>
