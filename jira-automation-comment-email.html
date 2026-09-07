@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sending a comment email with a Jira automation rule</title>
+<meta name="description" content="How to build a Jira Cloud automation rule that emails someone when a comment is added, the smart values to use, and the limits worth knowing before you rely on it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <p class="kicker">Guide</p>
+  <h1>Sending a comment email with an automation rule</h1>
+  <p class="tagline">The free way to write your own comment notification, and what it costs you.</p>
+  <nav class="site">
+    <a href="index.html">Documentation</a>
+    <a href="jira-email-when-someone-comments.html">All three approaches</a>
+    <a href="notify-only-assignee-and-reporter.html">Notify only the assignee</a>
+  </nav>
+</header>
+
+<p>Jira Automation is included in your plan and it can send email. If the notification scheme cannot express what you want &mdash; notify a shared inbox, notify only on high priority, notify a person who is not in Jira &mdash; this is the next thing to reach for, before you pay anybody for anything.</p>
+
+<h2>Building the rule</h2>
+
+<ol class="steps">
+  <li><span><strong>Create the rule</strong><p>Project settings &rarr; <em>Automation</em> &rarr; <em>Create rule</em>.</p></span></li>
+  <li><span><strong>Trigger: Issue commented</strong><p>This fires on every new comment on issues in scope for the rule.</p></span></li>
+  <li><span><strong>Add a condition, if you need one</strong><p>This is the part the notification scheme cannot do. Restrict by priority, issue type, label, or by what the comment says.</p></span></li>
+  <li><span><strong>Action: Send email</strong><p>Choose recipients &mdash; a role, a field such as Assignee or Reporter, or a literal address.</p></span></li>
+  <li><span><strong>Write the message</strong><p>Use smart values to pull in the issue and the comment. The ones you will want:</p></span></li>
+</ol>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Smart value</th><th>Gives you</th></tr></thead>
+  <tbody>
+    <tr><td><code>{{issue.key}}</code></td><td>The issue key</td></tr>
+    <tr><td><code>{{issue.summary}}</code></td><td>The issue title</td></tr>
+    <tr><td><code>{{issue.url}}</code></td><td>A link to the issue</td></tr>
+    <tr><td><code>{{comment.body}}</code></td><td>The comment text</td></tr>
+    <tr><td><code>{{comment.author.displayName}}</code></td><td>Who wrote it</td></tr>
+    <tr><td><code>{{issue.assignee.displayName}}</code></td><td>Who it is assigned to</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Turn the rule on, comment on an issue as somebody other than the rule actor, and check the audit log under the rule if nothing arrives.</p>
+
+<h2>What to know before you rely on it</h2>
+
+<p><strong>Executions are metered.</strong> Automation rules draw on a monthly execution allowance set by your Jira plan. A rule on <em>Issue commented</em> fires on every comment in scope, which on a busy project is the fastest way to spend that allowance. Check your usage under Automation before pointing the rule at every project you own.</p>
+
+<p><strong>Comment formatting is awkward.</strong> <code>{{comment.body}}</code> does not carry the commenter&rsquo;s formatting into an HTML email cleanly. Bullet lists, code blocks, and mentions tend to arrive flattened or with markup showing.</p>
+
+<p><strong>The sender is Atlassian, not you.</strong> The mail goes out through Atlassian&rsquo;s infrastructure from a Jira address. For an internal team that is fine. For anything a customer reads, it is not the impression you want.</p>
+
+<p><strong>Rules break silently.</strong> A changed field, a renamed role, a project moved to a different scheme &mdash; the rule stops doing what you assumed and nothing tells you. The audit log has the answer, but only if you think to look.</p>
+
+<h2>When an app is the better trade</h2>
+
+<p>If you find yourself maintaining a comment-email rule across several projects, watching the execution count, and still unhappy with how the message looks, that is the point where a purpose-built app earns its price.</p>
+
+<p><strong>Comment Alerts for Jira</strong> emails the assignee and reporter on a new comment, with your wording, from your own address, through your own <a href="https://resend.com">Resend</a> account &mdash; so the comment&rsquo;s formatting survives, the sender is you, nothing is metered against your automation allowance, and every attempt is logged where an administrator can read it.</p>
+
+<p>The honest catch is the same one as always: it needs a Resend account and a verified sending domain before it delivers to anybody. If you cannot add a DNS record, build the automation rule instead.</p>
+
+<p><a href="index.html">Setup guide and documentation &rarr;</a></p>
+
+<footer class="site">
+  Comment Alerts for Jira &middot; published by Adam Abubaker (trading as Signalpost)<br>
+  <a href="index.html">Documentation</a> &middot; <a href="privacy.html">Privacy policy</a> &middot; support: <a href="mailto:aadamabubaker4225@gmail.com">aadamabubaker4225@gmail.com</a>
+</footer>
+
+</div>
+</body>
+</html>

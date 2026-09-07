@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to get an email when someone comments on a Jira issue</title>
+<meta name="description" content="Three ways to email people when a comment is added to a Jira Cloud issue: the notification scheme, an automation rule, and a Marketplace app. What each one can and cannot do.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <p class="kicker">Guide</p>
+  <h1>Getting an email when someone comments on a Jira issue</h1>
+  <p class="tagline">Three ways to do it in Jira Cloud, and the honest limits of each.</p>
+  <nav class="site">
+    <a href="index.html">Documentation</a>
+    <a href="notify-only-assignee-and-reporter.html">Notify only the assignee</a>
+    <a href="jira-automation-comment-email.html">Automation rules</a>
+  </nav>
+</header>
+
+<p>Jira Cloud already emails people when a comment is added. Most of the time the complaint is not that nothing arrives &mdash; it is that the wrong people get it, or that the message is unreadable, or that it stopped arriving and nobody knows why. Each of those has a different fix.</p>
+
+<p>Start by working out which one you actually have.</p>
+
+<h2>1. The notification scheme &mdash; free, and usually the right answer</h2>
+
+<p>Every Jira project has a notification scheme: a list of events, and for each event, who gets told. <em>Issue Commented</em> is one of those events.</p>
+
+<ol class="steps">
+  <li><span><strong>Open your project settings</strong><p>Project settings &rarr; <em>Notifications</em>. You will see the scheme the project uses and the recipients for each event.</p></span></li>
+  <li><span><strong>Find the Issue Commented row</strong><p>It lists who is notified &mdash; typically Current Assignee, Reporter, All Watchers, and sometimes a project role or a whole group.</p></span></li>
+  <li><span><strong>Edit the scheme</strong><p>You need Jira administrator rights, and the scheme is usually shared with other projects. Changing it changes those projects too, so make a copy first if you are not sure.</p></span></li>
+</ol>
+
+<p>This handles the majority of cases and costs nothing. If your problem is <em>too many people are being emailed</em>, this is where you fix it &mdash; see <a href="notify-only-assignee-and-reporter.html">notifying only the assignee and reporter</a>.</p>
+
+<h3>Why it might not be enough</h3>
+
+<ul>
+  <li><strong>You cannot change the wording.</strong> Jira Cloud does not let administrators edit notification email templates. What Atlassian sends is what your team reads, including everyone outside your team who gets copied in.</li>
+  <li><strong>Jira does not email you about your own actions</strong> by default. Each person controls that under their own personal settings, so &ldquo;I never get notified&rdquo; is often a personal setting rather than a project one.</li>
+  <li><strong>Recipients are Jira roles, not addresses.</strong> If you want a message to reach a shared inbox, a distribution list, or somebody without a Jira licence, the scheme has nothing to offer you.</li>
+  <li><strong>There is no record.</strong> When somebody says they never got the email, there is nothing to look at.</li>
+</ul>
+
+<h2>2. An automation rule &mdash; free within limits, and flexible</h2>
+
+<p>Jira Automation can watch for a comment and send an email you write yourself. <em>Project settings &rarr; Automation &rarr; Create rule</em>, trigger <em>Issue commented</em>, action <em>Send email</em>.</p>
+
+<p>This is the right tool when you want unusual routing: notify a specific person only when a keyword appears, only on one issue type, only when the priority is high. It is genuinely powerful and it is included in your Jira plan.</p>
+
+<p>Its limits are worth knowing before you build on it. Automation rules consume a monthly execution allowance that depends on your Jira plan, and a busy project can spend it quickly. Formatting the comment body inside an automation email is fiddly. And a rule is a piece of configuration somebody has to maintain &mdash; rules quietly break, and when they do, nothing tells you.</p>
+
+<p>There is a fuller walkthrough in <a href="jira-automation-comment-email.html">sending comment emails with an automation rule</a>, including what it looks like when it goes wrong.</p>
+
+<h2>3. A Marketplace app</h2>
+
+<p>An app makes sense when you want the message itself to be yours: your wording, your subject line, your sender address, going out through your own email account rather than Atlassian&rsquo;s &mdash; and a log showing what was sent and to whom.</p>
+
+<p><strong>Comment Alerts for Jira</strong> does exactly that and nothing else. On a new comment it emails the issue&rsquo;s assignee and reporter, using a subject and body you write, sent through your own <a href="https://resend.com">Resend</a> account. Every attempt is recorded on the settings page with its result, so a message that never arrived shows up with a reason instead of vanishing.</p>
+
+<p>Be aware of what it asks of you in return: you need a Resend account and a verified sending domain before it will deliver to anyone. That is a DNS change and ten minutes of setup. If nobody at your company can add a DNS record, one of the two free options above will serve you better.</p>
+
+<h2>Which one to pick</h2>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th>If your problem is&hellip;</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td>Too many people are notified</td><td>The notification scheme</td></tr>
+    <tr><td>Nobody is notified</td><td>The notification scheme, then personal settings</td></tr>
+    <tr><td>Only notify in certain conditions</td><td>An automation rule</td></tr>
+    <tr><td>The email needs to say something different</td><td>An app</td></tr>
+    <tr><td>Mail must reach a shared inbox or a non-Jira address</td><td>An automation rule, or an app</td></tr>
+    <tr><td>You need proof of what was sent</td><td>An app</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Two of those three cost nothing. If one of them solves your problem, use it.</p>
+
+<footer class="site">
+  Comment Alerts for Jira &middot; published by Adam Abubaker (trading as Signalpost)<br>
+  <a href="index.html">Documentation</a> &middot; <a href="privacy.html">Privacy policy</a> &middot; support: <a href="mailto:aadamabubaker4225@gmail.com">aadamabubaker4225@gmail.com</a>
+</footer>
+
+</div>
+</body>
+</html>

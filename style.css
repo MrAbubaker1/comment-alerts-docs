@@ -77,6 +77,8 @@ h2 {
 h3 { font-size: 16px; font-weight: 600; margin: 28px 0 6px; }
 
 p { max-width: 68ch; }
+ul { max-width: 68ch; padding-left: 20px; }
+ul li { margin: 6px 0; }
 
 code {
   font-family: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;

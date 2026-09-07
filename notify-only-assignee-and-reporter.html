@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notify only the assignee when someone comments on a Jira issue</title>
+<meta name="description" content="How to stop Jira emailing everyone on a comment and notify only the assignee and reporter, using the notification scheme in Jira Cloud.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <p class="kicker">Guide</p>
+  <h1>Notifying only the assignee when someone comments</h1>
+  <p class="tagline">Stopping Jira from emailing half the project every time somebody replies.</p>
+  <nav class="site">
+    <a href="index.html">Documentation</a>
+    <a href="jira-email-when-someone-comments.html">All three approaches</a>
+    <a href="jira-automation-comment-email.html">Automation rules</a>
+  </nav>
+</header>
+
+<p>The usual cause is not a bug. It is that your notification scheme lists more recipients for <em>Issue Commented</em> than anyone intended &mdash; often <em>All Watchers</em>, which grows quietly, or a project role that has picked up most of the company.</p>
+
+<h2>Fixing it</h2>
+
+<ol class="steps">
+  <li><span><strong>Check which scheme the project uses</strong><p>Project settings &rarr; <em>Notifications</em>. The scheme name is at the top. Note it &mdash; the next step will tell you whether other projects share it.</p></span></li>
+  <li><span><strong>Check whether it is shared</strong><p>Jira settings &rarr; Issues &rarr; <em>Notification schemes</em>. The list shows how many projects use each one. If it is more than one, copy the scheme first and associate the copy with your project, or you will change notifications for teams who did not ask you to.</p></span></li>
+  <li><span><strong>Edit the Issue Commented event</strong><p>Remove the recipients you do not want. To notify only the two people who care most, leave <em>Current Assignee</em> and <em>Reporter</em> and remove the rest &mdash; particularly <em>All Watchers</em>, <em>Project Role</em> and any group entries.</p></span></li>
+  <li><span><strong>Test with a real comment</strong><p>Comment on an issue as somebody else and confirm who receives it. Do not test by commenting as yourself: Jira does not notify you of your own actions unless you have turned that on in your personal settings.</p></span></li>
+</ol>
+
+<div class="warn">
+  <h3>Watchers are the usual culprit</h3>
+  <p>Anyone who has ever been mentioned on, assigned to, or interested in an issue may be watching it. <em>All Watchers</em> looks harmless on the scheme and turns into twenty people on a long-running ticket. Removing it is the single change that quiets most noisy projects.</p>
+</div>
+
+<h2>Things this does not fix</h2>
+
+<p><strong>Someone still gets nothing.</strong> Check their personal notification settings, then check that they have permission to browse the project &mdash; Jira will not email a person about an issue they cannot see, no matter what the scheme says.</p>
+
+<p><strong>The email is still ugly.</strong> Jira Cloud does not allow administrators to edit notification templates. If the wording itself is the problem &mdash; because the recipients are clients, or contractors, or anybody who should not be reading Jira&rsquo;s house style &mdash; the scheme cannot help you and no amount of configuration will.</p>
+
+<p><strong>You need to know it was delivered.</strong> Jira keeps no record you can inspect. When somebody insists they never got the email, there is nothing to check.</p>
+
+<h2>If the wording matters</h2>
+
+<p>That last group of problems is what <strong>Comment Alerts for Jira</strong> is for. It emails the issue&rsquo;s assignee and reporter on a new comment, with a subject and body you write yourself, sent from your own address through your own <a href="https://resend.com">Resend</a> account, and it records every attempt so you can see what went out and to whom.</p>
+
+<p>It needs a Resend account with a verified sending domain &mdash; a DNS record and about ten minutes. If your problem is only <em>too many recipients</em>, the free fix above is the better one and you should stop here.</p>
+
+<p><a href="index.html">Setup guide and documentation &rarr;</a></p>
+
+<footer class="site">
+  Comment Alerts for Jira &middot; published by Adam Abubaker (trading as Signalpost)<br>
+  <a href="index.html">Documentation</a> &middot; <a href="privacy.html">Privacy policy</a> &middot; support: <a href="mailto:aadamabubaker4225@gmail.com">aadamabubaker4225@gmail.com</a>
+</footer>
+
+</div>
+</body>
+</html>
