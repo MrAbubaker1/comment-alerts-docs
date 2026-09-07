@@ -4,6 +4,9 @@ Setup guide and privacy policy for the Marketplace listing. Served by GitHub Pag
 
 - `index.html` — documentation and setup guide (the listing's Documentation URL)
 - `privacy.html` — privacy policy (the listing's Privacy Policy URL)
+- `support.html` — support page (the listing's Support URL)
+- `jira-email-when-someone-comments.html`, `notify-only-assignee-and-reporter.html`,
+  `jira-automation-comment-email.html` — guides, linked from the index
 - `style.css` — shared styles
 
 ## Before submitting the listing

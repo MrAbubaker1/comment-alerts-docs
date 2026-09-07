@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — Comment Alerts for Jira</title>
+<meta name="description" content="How to get help with Comment Alerts for Jira: what to send, what to expect, and how to report a security issue.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <p class="kicker">Support</p>
+  <h1>Getting help</h1>
+  <p class="tagline">One person maintains this app, and that person reads every message.</p>
+  <nav class="site">
+    <a href="index.html">Documentation</a>
+    <a href="index.html#troubleshooting">Troubleshooting</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+</header>
+
+<h2>Contact</h2>
+
+<p>Email <a href="mailto:aadamabubaker4225@gmail.com">aadamabubaker4225@gmail.com</a>. That address reaches Adam Abubaker, who wrote the app and answers its support.</p>
+
+<p><strong>Response time:</strong> within two business days, usually sooner. If you have not heard back in three, assume the message went astray and send it again &mdash; that is far more likely than it having been ignored.</p>
+
+<p>Support is in English, and it is included in the price. There is no separate support plan to buy.</p>
+
+<h2>Before you write</h2>
+
+<p>Three problems account for most of the mail, and all three have answers in the <a href="index.html#troubleshooting">troubleshooting section</a>:</p>
+
+<ul>
+  <li><strong>The test said &ldquo;sent&rdquo; but nothing arrived.</strong> Almost always an unverified sending domain. A <code>resend.dev</code> From address only ever delivers to the person who owns the Resend account.</li>
+  <li><strong>Comments produce no email at all.</strong> Check <em>Recent sends</em> on the settings page. A row reading <em>skipped &mdash; no resolvable recipients</em> means neither the assignee nor the reporter has an address the app can read.</li>
+  <li><strong>The settings page is nowhere to be found.</strong> It is administrator-only: the gear icon &rarr; <em>Apps</em> &rarr; <em>Email notifications</em>.</li>
+</ul>
+
+<h2>What to include</h2>
+
+<p>If none of those fit, send whatever of the following you have. Any one of them helps; all four make it quick.</p>
+
+<ul>
+  <li>Your Jira site URL, so the installation can be identified.</li>
+  <li>The issue key and roughly when the comment was made.</li>
+  <li>What you expected to happen, and what happened instead.</li>
+  <li>The matching row from <em>Recent sends</em>, including its status and reason.</li>
+</ul>
+
+<p>Please do not send your Resend API key. It is never needed to diagnose anything, and no legitimate support request will ever ask you for it. If you have already sent one anywhere, revoke it in Resend and issue a new one.</p>
+
+<h2>Bugs and feature requests</h2>
+
+<p>Both go to the same address. This version ships one rule &mdash; new comment, to the assignee and reporter, on every project &mdash; and what people ask for is what decides the next release. Per-project rules, other trigger events, and a recipient picker are the three most-requested things and are not built yet. Saying you want one is how it moves up.</p>
+
+<h2>Reporting a security issue</h2>
+
+<p>Email the same address with <em>security</em> in the subject line, and expect an acknowledgement within two business days. Please do not open a public Marketplace review for a security matter &mdash; it puts other customers at risk before there is a fix available.</p>
+
+<p>Reports made in good faith are welcome and will not be met with legal threats. Confirmed issues are fixed to Atlassian&rsquo;s Marketplace timeframes: critical within 10 days, high within four weeks. Affected customers are notified directly.</p>
+
+<h2>Refunds and cancellation</h2>
+
+<p>Billing, refunds, and cancellation are handled by Atlassian rather than by this app, under the Marketplace terms that applied when you subscribed. Cancel or change your subscription from <em>Apps &rarr; Manage apps</em> in your Jira site&rsquo;s administration. Anything Atlassian&rsquo;s billing support cannot resolve, write to me and I will help push it along.</p>
+
+<h2>If the app is ever discontinued</h2>
+
+<p>You would be told before it happened, not after, with enough notice to move. Your data lives in your own Jira site and your own Resend account, so nothing of yours is trapped inside the app &mdash; uninstalling removes its settings and its delivery log, and your email account carries on working exactly as before.</p>
+
+<footer class="site">
+  Comment Alerts for Jira &middot; published by Adam Abubaker (trading as Signalpost)<br>
+  <a href="index.html">Documentation</a> &middot; <a href="privacy.html">Privacy policy</a> &middot; <a href="mailto:aadamabubaker4225@gmail.com">aadamabubaker4225@gmail.com</a>
+</footer>
+
+</div>
+</body>
+</html>
