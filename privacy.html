@@ -37,11 +37,16 @@
   <tbody>
     <tr><td>Settings</td><td>Your From address and whether sending is enabled</td></tr>
     <tr><td>Template</td><td>The subject and HTML body an administrator wrote</td></tr>
-    <tr><td>Delivery log</td><td>The last 25 attempts: time, issue key, status, recipients, subject, duration, and any error</td></tr>
+    <tr><td>Rules</td><td>Which projects each rule covers, and who it notifies. People are stored as Atlassian account IDs, never as names or addresses</td></tr>
+    <tr><td>Delivery log</td><td>The last 100 attempts: time, issue key, rule, status, how many people it reached, subject, duration, and any error. Recipients are recorded as account IDs; the settings page looks their names up from Jira each time it is opened and stores nothing</td></tr>
     <tr><td>Provider API key</td><td>Encrypted at rest. Never displayed again after saving &mdash; the page can only tell whether a key exists</td></tr>
   </tbody>
 </table>
 </div>
+<p><strong>The app does not store anyone&rsquo;s name or email address.</strong> Addresses are resolved from Jira at the moment a notification is sent, used to send it, and then discarded. The one exception is an address an administrator types into a rule themselves &mdash; a shared inbox, say &mdash; which is kept because it is their own configuration and there is no Jira account behind it.</p>
+
+<p>Account IDs the app stores are reported to Atlassian every week through Forge&rsquo;s personal data reporting API. When Atlassian replies that an account has been closed, that account is erased from every rule and every log row automatically.</p>
+
 <p>Adam Abubaker (trading as Signalpost) operates no servers and stores nothing on its own infrastructure, because it has none. There is no vendor-side database, queue or log holding your data.</p>
 
 <h2>What leaves Atlassian</h2>
