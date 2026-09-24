@@ -1,6 +1,7 @@
 # Comment Alerts for Jira — public docs
 
-Setup guide and privacy policy for the Marketplace listing. Served by GitHub Pages.
+Setup guide, support page, privacy policy and guides for the Marketplace listing.
+Served by GitHub Pages at https://signalpostapps.com (see `CNAME`).
 
 - `index.html` — documentation and setup guide (the listing's Documentation URL)
 - `privacy.html` — privacy policy (the listing's Privacy Policy URL)
